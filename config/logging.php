@@ -73,6 +73,20 @@ return [
             'replace_placeholders' => true,
         ],
 
+        'cerebraslog' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/cerebras.log'),
+            'level' => env('LOG_LEVEL', 'debug'),
+            'replace_placeholders' => true,
+        ],
+
+        'tasklog' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/task.log'),
+            'level' => env('LOG_LEVEL', 'debug'),
+            'replace_placeholders' => true,
+        ],
+
         'daily' => [
             'driver' => 'daily',
             'path' => storage_path('logs/laravel.log'),
