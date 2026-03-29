@@ -7,6 +7,7 @@ namespace App\Models;
 use App\Enums\ConversationState\ConversationStateValue;
 use App\Models\Scopes\BelongsToTelegramUserScope;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Carbon;
 
 /**
@@ -33,6 +34,8 @@ use Illuminate\Support\Carbon;
  */
 class ConversationState extends Model
 {
+    use SoftDeletes;
+
     protected $fillable = [
         'telegram_user_id',
         'state',

@@ -21,6 +21,7 @@ return new class extends Migration
             $table->timestamp('notified_at')->nullable();
             $table->integer('notify_tries')->default(0);
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('task_id')
                 ->references('id')

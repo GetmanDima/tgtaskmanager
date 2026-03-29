@@ -9,6 +9,7 @@ use App\Models\Scopes\BelongsToTelegramUserScope;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Carbon;
 
 /**
@@ -41,6 +42,8 @@ use Illuminate\Support\Carbon;
  */
 class Task extends Model
 {
+    use SoftDeletes;
+
     protected $fillable = [
         'telegram_user_id',
         'status',
@@ -57,6 +60,12 @@ class Task extends Model
     protected static function booted(): void
     {
         static::addGlobalScope(new BelongsToTelegramUserScope);
+
+        static::updated(function (Task $task) {
+            $task->notifications()
+                ->whereNull('notified_at')
+                ->delete();
+        });
     }
 
     /**
